@@ -19,15 +19,15 @@ long long mul(long long a, long long b, long long p) {
 }
 
 // 64位整数乘法的long double算法
-long long mul(long long a, long long b, long long p) {
-	a %= p, b %= p; // 当a,b一定在0~p之间时，此行不必要。
-	long long c = (long double)a * b / p;
-	long long ans = a * b - c * p;
+typedef unsigned long long ull;
+ull mul(ull a, ull b, ull p) {
+	a %= p, b %= p;  // 当a,b一定在0~p之间时，此行不必要
+	ull c = (long double)a * b / p;
+	ull x = a * b, y = c * p;
+	long long ans = (long long)(x % p) - (long long)(y % p);
 	if (ans < 0) ans += p;
-	else if (ans >= p) ans -= p;
 	return ans;
 }
-
 
 // hamilton路径
 int f[1 << 20][20];
